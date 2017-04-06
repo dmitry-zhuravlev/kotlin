@@ -200,7 +200,8 @@ class QualifiedExpressionResolver {
                 when {
                     suppressDiagnosticsInDebugMode -> null
                     packageFragmentForVisibilityCheck is DeclarationDescriptorWithSource && packageFragmentForVisibilityCheck.source == SourceElement.NO_SOURCE -> {
-                        val importDirective = import.importDirective ?: error("Get absent import directive") // TODO
+                        val importDirective = import.importDirective ?:
+                                              error("Get absent import directive") // TODO
                         PackageFragmentWithCustomSource(packageFragmentForVisibilityCheck, KotlinSourceElement(importDirective.containingKtFile))
                     }
                     else -> packageFragmentForVisibilityCheck

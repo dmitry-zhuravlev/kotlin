@@ -87,7 +87,7 @@ class LazyImportResolver(
 
         qualifiedExpressionResolver.processImportReference(
                 import, moduleDescriptor, traceForImportResolve, excludedImportNames, packageFragment,
-                import.importDirective?.suppressDiagnosticsInDebugMode() ?: false
+                import.importDirective?.suppressDiagnosticsInDebugMode() ?: true
         )
     }
 
