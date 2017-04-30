@@ -178,8 +178,8 @@ class QualifiedExpressionResolver {
         return fqName.pathSegments().map {
             object : QualifierPart {
                 override val name: Name = it
-                override val expression: KtSimpleNameExpression
-                    get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+                override val expression: KtSimpleNameExpression? = null
+//                    get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
                 override val typeArguments: KtTypeArgumentList? get() = null
                 override val location: LookupLocation get() = NoLookupLocation.FROM_SYNTHETIC_SCOPE
             }
