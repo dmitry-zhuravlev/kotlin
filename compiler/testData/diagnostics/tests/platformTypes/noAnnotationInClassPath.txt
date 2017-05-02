@@ -17,6 +17,5 @@ public open class B {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    public final /*synthesized*/ fun bar(/*0*/ y: ((y: kotlin.String?) -> kotlin.Boolean)!): kotlin.Unit
     public open fun bar(/*0*/ y: A<kotlin.String!>!): kotlin.Unit
 }

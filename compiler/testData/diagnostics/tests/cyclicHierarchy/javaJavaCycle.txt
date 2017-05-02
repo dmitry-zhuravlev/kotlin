@@ -24,9 +24,4 @@ public open class B {
     public/*package*/ interface B3 {
         public abstract fun getFoo(): kotlin.Int
     }
-
-    // Static members
-    public/*package*/ final /*synthesized*/ fun B1(/*0*/ function: () -> kotlin.Int): B.B1
-    public/*package*/ final /*synthesized*/ fun B2(/*0*/ function: () -> kotlin.Int): B.B2
-    public/*package*/ final /*synthesized*/ fun B3(/*0*/ function: () -> kotlin.Int): B.B3
 }
