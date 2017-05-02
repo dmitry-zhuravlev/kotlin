@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2016 JetBrains s.r.o.
+ * Copyright 2010-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -179,6 +179,8 @@ class JavaSyntheticPropertiesScope(storageManager: StorageManager, private val l
             else -> result
         }
     }
+
+    override fun getSyntheticStaticFunctions(qualifierDescriptor: ClassDescriptor, name: Name, local: LookupLocation): Collection<FunctionDescriptor> = emptyList()
 
     private fun collectSyntheticPropertiesByName(result: SmartList<PropertyDescriptor>?, type: TypeConstructor, name: Name, processedTypes: MutableSet<TypeConstructor>?, location: LookupLocation): SmartList<PropertyDescriptor>? {
         if (processedTypes != null && !processedTypes.add(type)) return result

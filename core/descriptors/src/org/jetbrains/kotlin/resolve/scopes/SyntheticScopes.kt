@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2015 JetBrains s.r.o.
+ * Copyright 2010-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package org.jetbrains.kotlin.resolve.scopes
 
+import org.jetbrains.kotlin.descriptors.ClassDescriptor
 import org.jetbrains.kotlin.descriptors.FunctionDescriptor
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.incremental.components.LookupLocation
@@ -26,6 +27,8 @@ import org.jetbrains.kotlin.types.KotlinType
 interface SyntheticScope {
     fun getSyntheticExtensionProperties(receiverTypes: Collection<KotlinType>, name: Name, location: LookupLocation): Collection<PropertyDescriptor>
     fun getSyntheticMemberFunctions(receiverTypes: Collection<KotlinType>, name: Name, location: LookupLocation): Collection<FunctionDescriptor>
+
+    fun getSyntheticStaticFunctions(qualifierDescriptor: ClassDescriptor, name: Name, location: LookupLocation): Collection<FunctionDescriptor>
 
     fun getSyntheticExtensionProperties(receiverTypes: Collection<KotlinType>): Collection<PropertyDescriptor>
     fun getSyntheticMemberFunctions(receiverTypes: Collection<KotlinType>): Collection<FunctionDescriptor>
@@ -45,6 +48,9 @@ fun SyntheticScopes.collectSyntheticExtensionProperties(receiverTypes: Collectio
 
 fun SyntheticScopes.collectSyntheticMemberFunctions(receiverTypes: Collection<KotlinType>, name: Name, location: LookupLocation)
         = scopes.flatMap { it.getSyntheticMemberFunctions(receiverTypes, name, location) }
+
+fun SyntheticScopes.collectSyntheticStaticFunctions(qualifierDescriptor: ClassDescriptor, name: Name, location: LookupLocation)
+        = scopes.flatMap { it.getSyntheticStaticFunctions(qualifierDescriptor, name, location) }
 
 fun SyntheticScopes.collectSyntheticExtensionProperties(receiverTypes: Collection<KotlinType>)
         = scopes.flatMap { it.getSyntheticExtensionProperties(receiverTypes) }

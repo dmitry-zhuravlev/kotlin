@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2016 JetBrains s.r.o.
+ * Copyright 2010-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import org.jetbrains.kotlin.descriptors.annotations.Annotations
 import org.jetbrains.kotlin.descriptors.impl.SimpleFunctionDescriptorImpl
 import org.jetbrains.kotlin.descriptors.synthetic.SyntheticMemberDescriptor
 import org.jetbrains.kotlin.incremental.components.LookupLocation
+import org.jetbrains.kotlin.load.java.descriptors.JavaMethodDescriptor
 import org.jetbrains.kotlin.load.java.sam.SingleAbstractMethodUtils
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.calls.inference.wrapWithCapturingSubstitution
@@ -33,6 +34,7 @@ import org.jetbrains.kotlin.storage.StorageManager
 import org.jetbrains.kotlin.types.*
 import org.jetbrains.kotlin.types.checker.findCorrespondingSupertype
 import java.util.*
+import kotlin.collections.LinkedHashSet
 import kotlin.properties.Delegates
 
 interface SamAdapterExtensionFunctionDescriptor : FunctionDescriptor, SyntheticMemberDescriptor<FunctionDescriptor> {
@@ -101,6 +103,13 @@ class SamAdapterFunctionsScope(
     override fun getSyntheticExtensionProperties(receiverTypes: Collection<KotlinType>, name: Name, location: LookupLocation): Collection<PropertyDescriptor> = emptyList()
 
     override fun getSyntheticExtensionProperties(receiverTypes: Collection<KotlinType>): Collection<PropertyDescriptor> = emptyList()
+
+    override fun getSyntheticStaticFunctions(qualifierDescriptor: ClassDescriptor, name: Name, location: LookupLocation): Collection<FunctionDescriptor> {
+        return qualifierDescriptor.staticScope.getContributedFunctions(name, location)
+                .filterIsInstance<JavaMethodDescriptor>()
+                .filter(SingleAbstractMethodUtils::isSamAdapterNecessary)
+                .map(SingleAbstractMethodUtils::createSamAdapterFunction)
+    }
 
     private class MyFunctionDescriptor(
             containingDeclaration: DeclarationDescriptor,

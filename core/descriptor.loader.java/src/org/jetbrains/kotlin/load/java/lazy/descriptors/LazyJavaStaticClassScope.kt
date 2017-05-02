@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2015 JetBrains s.r.o.
+ * Copyright 2010-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,10 +64,6 @@ class LazyJavaStaticClassScope(
     }
 
     override fun computeNonDeclaredFunctions(result: MutableCollection<SimpleFunctionDescriptor>, name: Name) {
-        c.components.samConversionResolver.resolveSamConstructor(ownerDescriptor) {
-            ownerDescriptor.unsubstitutedInnerClassesScope.getContributedClassifier(name, NoLookupLocation.FOR_ALREADY_TRACKED)
-        }?.let { result.add(it) }
-
         val functionsFromSupertypes = getStaticFunctionsFromJavaSuperClasses(name, ownerDescriptor)
         result.addAll(resolveOverridesForStaticMembers(name, functionsFromSupertypes, result, ownerDescriptor, c.components.errorReporter))
 
