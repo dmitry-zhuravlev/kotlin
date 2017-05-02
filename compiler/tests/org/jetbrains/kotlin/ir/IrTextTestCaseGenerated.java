@@ -689,6 +689,12 @@ public class IrTextTestCaseGenerated extends AbstractIrTextTestCase {
             doTest(fileName);
         }
 
+        @TestMetadata("interfaceThisRef.kt")
+        public void testInterfaceThisRef() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/ir/irText/expressions/interfaceThisRef.kt");
+            doTest(fileName);
+        }
+
         @TestMetadata("jvmInstanceFieldReference.kt")
         public void testJvmInstanceFieldReference() throws Exception {
             String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/ir/irText/expressions/jvmInstanceFieldReference.kt");
@@ -722,6 +728,12 @@ public class IrTextTestCaseGenerated extends AbstractIrTextTestCase {
         @TestMetadata("membersImportedFromObject.kt")
         public void testMembersImportedFromObject() throws Exception {
             String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/ir/irText/expressions/membersImportedFromObject.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("multipleThisReferences.kt")
+        public void testMultipleThisReferences() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/ir/irText/expressions/multipleThisReferences.kt");
             doTest(fileName);
         }
 
@@ -836,6 +848,12 @@ public class IrTextTestCaseGenerated extends AbstractIrTextTestCase {
         @TestMetadata("stringTemplates.kt")
         public void testStringTemplates() throws Exception {
             String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/ir/irText/expressions/stringTemplates.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("thisOfGenericOuterClass.kt")
+        public void testThisOfGenericOuterClass() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/ir/irText/expressions/thisOfGenericOuterClass.kt");
             doTest(fileName);
         }
 
